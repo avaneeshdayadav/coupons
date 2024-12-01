@@ -94,6 +94,10 @@ This project is a RESTful API built with Express.js for managing and applying di
 ### 8. **Time-Based Coupons**
    - Example 10% off for purchases made between 6 PM and 9 PM.
    - **Reason**: Requires time-tracking logic and validation based on current date/time.
+
+### 9. **Coupon Expiry**
+   - Handling expiry dates and time-based conditions for coupons.
+   - **Reason**: Not included in the MVP.
 ---
 
 ## **Assumptions**
