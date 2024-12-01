@@ -1,6 +1,13 @@
 function applyCartWise(cart, couponDetails) {
     if (cart.total_price >= couponDetails.threshold) {
-      const discount = (cart.total_price * couponDetails.discount) / 100;
+      let discount = (cart.total_price * couponDetails.discount) / 100;
+
+      // Ensure the discount does not exceed the total cart price
+      const totalCartPrice = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      if (discount > totalCartPrice) {
+        discount = totalCartPrice;
+      }
       return { discount, type: 'cart-wise' };
     }
     return { discount: 0, type: 'cart-wise' };
@@ -9,7 +16,15 @@ function applyCartWise(cart, couponDetails) {
   function applyProductWise(cart, couponDetails) {
     const item = cart.items.find((i) => i.product_id === couponDetails.product_id);
     if (item) {
-      const discount = (item.price * item.quantity * couponDetails.discount) / 100;
+      let discount = (item.price * item.quantity * couponDetails.discount) / 100;
+      
+      // Ensure the discount does not exceed the total cart price
+      const totalCartPrice = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      if (discount > totalCartPrice) {
+        discount = totalCartPrice;
+      }
+
       return { discount, type: 'product-wise' };
     }
     return { discount: 0, type: 'product-wise' };

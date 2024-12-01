@@ -75,7 +75,7 @@ exports.updateCoupon = async (req, res) => {
 
 exports.applyCoupon = async (req, res) => {
   try {
-    const cart = req.body.cart;
+    const cart = req.body;
     const coupon = await Coupon.findById(req.params.id);
 
     if (!coupon) return res.status(404).json({ error: 'Coupon not found' });
